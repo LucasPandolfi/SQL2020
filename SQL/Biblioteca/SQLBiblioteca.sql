@@ -59,3 +59,26 @@ VALUES ('Terror'),('Terror Psicológico'),('Mistério'),('Romance'),('Ação');
 
 INSERT INTO Livros(Titulo, IdAutor, IdGenero)
 VALUES ('Código da vinci', 2, 3),  ('frankenstein', 4, 2), ('Médico e o alguma coisa', 1, 5), ('Mitologia Nordica', 1, 5), ('Drácula', 3, 4)
+
+-- SELECIONAR TODOS OS AUTORES 
+SELECT IdAutor, NomeAutor FROM Autores;
+
+-- SELECIONAR TODOS OS GENEROS
+SELECT IdGenero, NomeGenero FROM Generos;
+
+-- SELECIONAR TODOS OS LIVROS
+SELECT IdLivros, Titulo FROM Livros;
+
+-- SELECIONANDO TODOS OS LIVROS E SEU RESPECTIVOS AUTORES
+SELECT Titulo, IdAutor FROM Livros;
+
+-- SELECIONANDO TODOS OS LIVROS E SEUS RESPECTIVOS GENEROS
+SELECT Titulo, IdGenero FROM Livros;
+
+-- SELECIONANDO TODOS OS LIVROS E SEUS RESPECTIVOS GENEROS E AUTORES
+SELECT Titulo, IdGenero, IdAutor FROM Livros
+
+-- SELECIONANDO TODOS OS LIVROS E SEU RESPECTIVOS AUTORES ATUALIZADO
+SELECT L.Titulo, Au.NomeAutor FROM Livros AS L JOIN Autores AS Au ON L.IdAutor = Au.IdAutor;
+
+SELECT L.Titulo, Ge.NomeGenero FROM Livros AS L JOIN Generos AS Ge ON L.IdGenero = Ge.IdGenero;
