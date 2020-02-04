@@ -1,0 +1,98 @@
+--DDL (LINGUAGEM DE DEFINIÇÃO DE DADOS)
+--CRIANDO UM BANCO DE DADOS
+CREATE DATABASE Pessoas;
+
+--USANDO O BANCO DE DADOS
+USE Pessoas;
+
+--CRIANDO UMA TEBELA
+CREATE TABLE Pessoa (
+	IdPessoa INT PRIMARY KEY IDENTITY,
+	NomePessoa VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE Telefone (
+	IdTelefone INT PRIMARY KEY IDENTITY,
+	Descricao VARCHAR(200) NOT NULL,
+	IdPessoa INT FOREIGN KEY REFERENCES Pessoa (IdPessoa)
+);
+
+CREATE TABLE Email (
+	IdEmail INT PRIMARY KEY IDENTITY,
+	Descricao VARCHAR(200) NOT NULL,
+	IdPessoa INT FOREIGN KEY REFERENCES Pessoa (IdPessoa)
+);
+
+CREATE TABLE Cnhs (
+	IdCnhs INT PRIMARY KEY IDENTITY,
+	Descricao VARCHAR(200) NOT NULL,
+	IdPessoa INT FOREIGN KEY REFERENCES Pessoa (IdPessoa)
+);
+
+--DML (LINGUAGEM DE MANIPULAÇÃO DE DADOS)
+
+--INSERINDO PESSOAS
+INSERT INTO Pessoa (NomePessoa)
+VALUES ('Lucas'), ('Igor'), ('Valeria'), ('Amanda'), ('Victor'), ('Yuri');
+
+--VEREIFICANDO A TABELA
+SELECT * FROM Pessoa;
+SELECT * FROM Telefone;
+SELECT * FROM Email;
+SELECT * FROM Cnhs;
+
+
+--INSERINDO TELEFONES
+INSERT INTO Telefone (Descricao, IdPessoa)
+VALUES ('11987871912', 3), ('11985357025', 1), ('1156894125', 2), ('1198253671', 4), ('1123854965', 5), ('1135624589', 6);
+
+INSERT INTO Telefone (Descricao, IdPessoa)
+VALUES ('958746589', 3);
+
+--INSERINDO EMAIL
+INSERT INTO Email (Descricao, IdPessoa)
+VALUES ('valeria@email.com', 3), ('lucas@email.com', 1), ('igor@email.com', 2), ('amanda@email.com', 4), ('victor@email.com', 5), ('yuri@email.com', 6);
+
+--INSERINDO CNHS
+INSERT INTO Cnhs (Descricao, IdPessoa)
+VALUES ('2323232323', 3), ('1234567890', 2), ('2345647639', 4), ('8978536401', 5), ('0894032123', 6);
+
+--ALTERANDO O TELEFONE DE UMA PESSOA
+UPDATE Telefone
+SET Descricao = '1145879632'
+WHERE IdTelefone = 2;
+
+--NESTE CASO EU PODERIA ALTERAR OS DADOS ESCOLHENDO O IDTELEFONE OU O IDPESSOA.
+
+UPDATE Telefone
+SET Descricao = '11985357025'
+WHERE IdPessoa = 1;
+
+--ATRIBUINDO MAIS UM EMAIL PARA UMA PESSOA
+INSERT INTO Email (Descricao, IdPessoa)
+VALUES ('lucas2@email.com', 1);
+
+--DELETANDO DADOS DE UMA PESSOA
+DELETE FROM Telefone
+WHERE IdPessoa = 1;
+
+--
+DELETE FROM Email
+WHERE IdPessoa = 1;
+
+DELETE FROM Pessoa
+WHERE IdPessoa = 1;
+
+--DQL (LINGUAGEM DE CONSULTA DE DADOS)
+--SELECIONANDO TODOS OS EMAILS DE UMA PESSOA
+SELECT E.IdEmail, Descricao, Pe.NomePessoa FROM Email AS E JOIN Pessoa AS Pe ON E.IdPessoa = Pe.IdPessoa  WHERE Pe.NomePessoa = 'Valeria';
+
+--SELECIONANDO TODOS OS TELEFONES DE UMA PESSOA
+SELECT IdTelefone , Descricao, IdPessoa FROM Telefone WHERE IdPessoa = 3;
+
+--SELECIONANDO TODOS OS CNH E MOSTANDO SEUS RESPECTIVOS DONOS
+SELECT IdCnhs, Descricao, IdPessoa FROM Cnhs WHERE IdPessoa = 3;
+
+
+
+

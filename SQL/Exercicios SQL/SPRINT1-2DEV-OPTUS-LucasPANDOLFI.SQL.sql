@@ -230,3 +230,26 @@ SELECT IdArtista, Nome, IdEstilo FROM Albuns WHERE IdEstilo = 3;
 -- SELECIONANDO OS ALBUNS E ARTISTAS E ORDENANDO POR DATA DE LANÇAMENTO
 SELECT IdAlbum, Nome, IdArtista, DataLancamento FROM Albuns
 ORDER BY DataLancamento DESC;
+
+--USANDO INNER JOIN (JUNÇÃO DE DUAS OU MAIS TABELAS)
+SELECT Artistas.Nome, Albuns.Nome FROM Artistas 
+INNER JOIN Albuns ON Artistas.IdArtista = Albuns.IdArtista
+WHERE Albuns.IdArtista = 6;
+
+--SELECIONAR OS ALBUNS LANÇADOS NA MESMA DATA COM INNER JOIN
+SELECT * FROM Artistas
+INNER JOIN Albuns ON Artistas.IdArtista = Albuns.IdArtista
+WHERE DataLancamento = '2020-01-28'
+
+-- SELECIONAR ALBUNS E ARTISTAS E ORDENAR POR DATA DE LANCAMENTO  (MAIS ANTIGO PARA O MAIS RECENTE) COM INNER JOIN 
+SELECT Artistas.Nome AS NomeArtista, Albuns.Nome AS NomeAlbum, Albuns.DataLancamento --ATRIBUTOS SELECIONADOS COM APELIDOS 
+FROM Artistas 
+INNER JOIN Albuns ON Artistas.IdArtista = Albuns.IdArtista
+ORDER BY DataLancamento ASC;
+
+--SELECIONAR ARTISTAS DO MESMO ESTILO MUSICAL COM INNER JOIN 
+SELECT Artistas.Nome, Estilos.Nome
+FROM Artistas
+INNER JOIN Albuns ON Artistas.IdArtista = Albuns.IdArtista
+INNER JOIN Estilos ON Albuns.IdEstilo = Estilos.IdEstilo 
+WHERE Estilos.IdEstilo = 3;
